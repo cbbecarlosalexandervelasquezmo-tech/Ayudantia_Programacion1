@@ -1,0 +1,6 @@
+#Entrada
+palabra = input ("ingresa una palabra : ")
+#Proceso y salida
+print ("Mayusculas :", palabra.upper())
+print ("Minusculas :", palabra.lower())
+print("Cantidad de letras :", len(palabra))
