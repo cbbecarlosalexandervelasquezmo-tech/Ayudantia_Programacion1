@@ -1,0 +1,33 @@
+#pida frase al usuario
+#muestre : cantidad de caracteres, cantidad de palabras y la cantidad de vocales
+#guarde las palabras en una lista
+#muestre: la palabra mas larga, cuantas palabras empiezan en vocal
+#permita buscar una palabra dentro de la lista
+frase = input("ingrese una frase:")
+cantidad_caracteres = len(frase)
+palabras= frase.split()
+cantidad_palabras= len(palabras)
+vocales = 0
+for letra in frase:
+    if letra.lower() in "aeiou":
+        vocales +=1
+palabra_larga= "  "
+for palabra in palabras:
+    if len(palabra) > len(palabra_larga):
+        palabra_larga = palabra
+contador_vocal=0
+for palabra in palabras:
+    if palabra[0].lower() in "aeiou":
+        contador_vocal += 1
+buscar = input("Que palabra desea buscar...")
+if buscar in palabras:
+    encontrado="Si existe la palabra"
+else:
+    encontrado= "no existe "
+print("\n---RESULTADOS---")
+print("Caracteres:", cantidad_caracteres)
+print("Palabras:", cantidad_palabras)
+print("Vocales:", vocales)
+print("Palabra mas larga:", palabra_larga)
+print("Palabra que empieza con vocal:", contador_vocal)
+print("Busqueda", encontrado)
