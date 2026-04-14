@@ -1,0 +1,98 @@
+import os
+# Arrays>(Listas) para guardar datos
+articulos=[]
+precios=[]
+ventas=[]
+
+#1 Funcion para poder ingresar articulos
+def ingresar_articulos ():
+    n = int(input("Cuantos articulos desea ingresar;"))
+
+    for i in range (n): 
+        #f permite insertar variables dentro del texto
+        #{i+1} es nuestro contador iniciando desde 1 y no desde 0 aumentando o sumando un "+1"
+        nombre = input(f"Ingrese nombre del articulo {i+1}:")
+        precio = float (input (f"Ingrese precio de {nombre}:"))
+        #append() agrega el dato al final de la lista ejm: articulos = ["Paracetamol"]
+        articulos.append(nombre)
+        precios.append(precio)
+    print("\nArticulos guardados correctamente.\n")
+ 
+ #2 Funcion para mostrar articulos en formato tabla
+def mostrar_articulos ():
+    #len () cuenta elementos y verifica si la lista esta vacia
+    if len(articulos)==0:
+        print("\nNo hay articulos registrados.\n")
+        return
+    print("\n||||||||||LISTA DE ARTICULOS||||||||||")
+    print("N'\tAticulo\tPrecio")
+    print("-"*30)
+
+    for i in range(len(articulos)):
+        #muestra numero, nombre y precio  ejemplo >>> 1 Paracetamol     Bs.2
+        print(f"{i+1}\t{articulos[i]}\t\tBs.{precios[i]}")
+    print ()
+
+#3 Funcion para realizar venta
+def realizar_venta():
+    if len(articulos)==0:
+        print("\nPrimero debe de ingresar articulos.\n")
+        return
+    
+    mostrar_articulos()
+
+    articulo = input("Ingrese el nombre del articulo a vender:")
+    cantidad = int(input("Ingrese la cantidad:"))
+
+    if articulo in articulos:
+        #Busca la posicion del producto ejemplo>>> posicion>>> articulos=["laptop", "usb"]    laptop posicion 1
+        posicion = articulos.index(articulo)
+        total = precios[posicion]*cantidad
+
+        ventas.append([articulo, cantidad, total])
+
+        print ("\nVenta realizada correctamente.")
+        print (f"Total a pagar > Bs. {total}\n")
+    else:
+        print("\nArticulo no fue encontrado.\n")
+
+#4 Funcion para mostrar Ventas
+def mostrar_ventas ():
+    if len(ventas) ==0:
+        print("\nNo hay ventas registradas.\n")
+        return
+    
+    print("\n||||||||||REPORTE DE VENTAS||||||||||")
+    print("Articulo\tCantidad\tTotal")
+    print("-"*40)
+
+    for venta in ventas:
+        print(f"{venta[0]}\t\t{venta[1]}\t\tBs. {venta[2]}")
+    print()
+#5 Menu Principal 
+def menu():
+    while True:
+        print ("||||||||||MENU DE VENTAS||||||||||")
+        print("1. Ingresar articulos")
+        print("2. Realizar venta")
+        print("3. Mostrar articulos")
+        print("4. Mostrar ventas")
+        print("5. Salir")
+
+        opcion = input("Seleccione una opcion:")
+
+        if opcion == "1":
+            ingresar_articulos()
+        elif opcion == "2":
+            realizar_venta()
+        elif opcion == "3":
+            mostrar_articulos()  
+        elif opcion == "4":
+            mostrar_ventas()
+        elif opcion == "5":
+            print("Finalizo el programa")
+            break
+        else:
+            print("Opcion invalida.\n")
+menu()
+
