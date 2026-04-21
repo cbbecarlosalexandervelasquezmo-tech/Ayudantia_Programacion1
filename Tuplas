@@ -1,0 +1,101 @@
+#Algoritmo de Pedidos
+#Ejercicios usando tuplas, funciones y ciclos
+#Definir costo del pedido
+#COSTO_ENVIO = 15
+#1. Función para leer Productos en una lista de tuplas  (empresa,producto, cantidad, precio)
+#2. Función para mostrar la lista de productos
+#3. Función para Leer Pedido en una listas de tuplas Usuario(nombre_usuario, teléfono, fecha), Productos (Empresa, producto, cantidad)
+#4. Función para Calcular Pedido en una lista de tuplas pedido(teléfono,Empresa, producto, cantidad, precio) y pedido_total(teléfono, fecha, ubicación, tiempo_entrega, precio_total)
+#5.Funcion imprimir Pedido:
+  #Fecha
+  #Teléfono
+  #Ubicación
+  #Producto, cantidad, precio
+  #Total: precio + costo_envio
+
+#CONSTANTE GLOBLAL
+COSTO_ENVIO = 15
+#1 Funcion para leer productos en una lista de tuplas
+def leer_productos():
+    productos=[]
+    n = int(input("Cuantos productos deseas registrar? : "))
+
+    for i in range(n):
+        print(f"\nProducto {i+1}")
+        empresa = input("Empresa : ")
+        producto = input("Nombre del producto : ")
+        cantidad = int (input("Cantidad disponible : "))
+        precio = float(input ("Precio : "))
+
+        #TUPLA (EMPRESA,PRODUCTO,CANTIDAD,PRECIO)
+        productos.append((empresa , producto, cantidad, precio))
+        return productos 
+#2 Función para mostrar la lista de productos
+def mostrar_productos(productos):
+    print("\n--- LISTA DE PRODUCTOS ---")
+    for p in productos:
+        print (f"Empresa : {p[0]}, Producto : {p[1]}, Cantidad : {p[2]}, Precio : {p[3]}")
+#3 Funcion para leer pedido
+def leer_pedido ():
+    usuario = (
+        input("Nombre del usuario : "),
+        input("Telefono : "),
+        input("Fecha : ")
+    )
+    productos_pedido = []
+    n = int(input("Cuantos productos deseas pedir? : "))
+    for i in range(n):
+        print (f"\nProducto pedido {i+1}")
+        empresa = input("Empresa : ")
+        producto = input("Producto : ")
+        cantidad = int (input("Cantidad : "))
+
+        productos_pedido.append((empresa , producto, cantidad))
+        return usuario, productos_pedido
+#4 Función para Calcular Pedido
+def calcular_pedido(usuario, productos_pedido, productos_disponibles):
+    telefono = usuario [1]
+    fecha = [2]
+    detalle_pedido = []
+    total = 0
+
+    for pedido in productos_pedido:
+        empresa, producto, cantidad = pedido
+
+        for p in productos_disponibles:
+            if p[0] == empresa and p [1] == producto:
+                precio = p [3]
+                subtotal = precio * cantidad
+                total += subtotal
+#Tupla     
+                detalle_pedido.append((telefono, empresa, producto, cantidad, precio))
+
+                pedido_total = (telefono, fecha, "Cochabamba", "24h", total)
+                return detalle_pedido, pedido_total
+#5 Funcion para imprimir pedido
+def imprimir_pedido(detalle_pedido, pedido_total):
+    print("\n---FACTURA---")
+    print(f"Fecha : {pedido_total[1]}")
+    print(f"Telefono : {pedido_total[0]}")
+    print(f"Ubicacion : {pedido_total[2]}")
+
+    print("\nProductos : ")
+    for d in detalle_pedido:
+        print(f"{d[2]} - Cantidad: {d[3]} - Precio: {d[4]}")
+
+        total_final = pedido_total[4] + COSTO_ENVIO
+        print(f"\nTotal : {pedido_total[4]}")
+        print(f"Costo de envio : {COSTO_ENVIO} ")
+        print(f"Total a pagar : {total_final}")
+
+productos = leer_productos()
+mostrar_productos(productos)
+usuario, productos_pedido = leer_pedido()
+detalle, total = calcular_pedido(usuario, productos_pedido, productos)
+
+imprimir_pedido(detalle, total)
+#Tuplas = para datos fijos
+#Listas = para multiples elementos
+#Funciones = modularidad
+#Ciclos (for) = recorrer datos
+#f-strings = imprimir bonito
